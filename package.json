@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/teodora-zaharieva/users-api.git"
@@ -15,5 +13,8 @@
   "bugs": {
     "url": "https://github.com/teodora-zaharieva/users-api/issues"
   },
-  "homepage": "https://github.com/teodora-zaharieva/users-api#readme"
+  "homepage": "https://github.com/teodora-zaharieva/users-api#readme",
+  "devDependencies": {
+    "eslint": "^7.20.0"
+  }
 }
