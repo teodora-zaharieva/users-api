@@ -1,0 +1,19 @@
+{
+  "name": "users-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teodora-zaharieva/users-api.git"
+  },
+  "author": "Teodora Zaharieva",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/teodora-zaharieva/users-api/issues"
+  },
+  "homepage": "https://github.com/teodora-zaharieva/users-api#readme"
+}
