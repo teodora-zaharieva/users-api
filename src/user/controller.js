@@ -1,35 +1,35 @@
 const userService = require('./service')
 
-const getUser = (req, res) => {
-  const { username } = req.params
+const getUser = async (req, res) => {
+  const foundUser = await userService.getUser(req.params.username)
 
-  const foundUser = userService.getUser(username)
-
-  res.json(foundUser)
+  foundUser.error
+    ? res.status(400).json({ error: foundUser.error })
+    : res.status(200).json({ data: foundUser })
 }
 
-const createUser = (req, res) => {
-  const { username, ...userData } = req.body
+const createUser = async (req, res) => {
+  const createdUser = await userService.createUser(req.body)
 
-  const createdUser = userService.createUser(username, userData)
-
-  res.json(createdUser)
+  createdUser.error
+    ? res.status(400).json({ error: createdUser.error })
+    : res.status(201).json({ data: createdUser })
 }
 
-const updateUser = (req, res) => {
-  const { username } = req.params
+const updateUser = async (req, res) => {
+  const updatedUser = await userService.updateUser(req.params.username, req.body)
 
-  const updatedUser = userService.updateUser(username, req.body)
-
-  res.json(updatedUser)
+  updatedUser.error
+    ? res.status(400).json({ error: updatedUser.error })
+    : res.status(201).json({ data: updatedUser })
 }
 
-const deleteUser = (req, res) => {
-  const { username } = req.params
+const deleteUser = async (req, res) => {
+  const deletedUser = await userService.deleteUser(req.params.username, req.body)
 
-  const deletedUser = userService.deleteUser(username, req.body)
-
-  res.json(deletedUser)
+  deletedUser.error
+    ? res.status(400).json({ error: deletedUser.error })
+    : res.status(202).json({ data: deletedUser })
 }
 
 module.exports = {

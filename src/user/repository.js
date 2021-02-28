@@ -1,47 +1,66 @@
-let userDatastore = {}
+const { create } = require('domain')
+const Datastore = require('nedb')
+const path = require('path')
 
-const getUser = (username) => {
-  const foundUser = userDatastore[username]
+const db = new Datastore({
+  filename: path.resolve(__dirname, 'datastore.db'),
+  autoload: true
+})
 
-  if (!foundUser) {
-    throw new Error(`User with username: "${username}" does not exist!`)
+const getUser = async (username) => {
+  try {
+    const foundUser = await new Promise((resolve, reject) => {
+      db.findOne({ username }, (error, data) => {
+        error ? reject(error) : resolve(data)
+      })
+    })
+
+    return foundUser
+  } catch (error) {
+    return error
   }
-
-  return foundUser
 }
 
-const createUser = (username, userData) => {
-  if (userDatastore[username]) {
-    throw new Error(`Username: "${username}" is already taken!`)
+const createUser = async (userData) => {
+  try {
+    const createdUser = await new Promise((resolve, reject) => {
+      db.insert(userData, (error, data) => {
+        error ? reject(error) : resolve(data)
+      })
+    })
+
+    return createdUser
+  } catch (error) {
+    return error
   }
-
-  userDatastore[username] = { username, ...userData }
-
-  return userDatastore[username]
 }
 
-const updateUser = (username, userData) => {
-  const userToUpdate = userDatastore[username]
+const updateUser = async (username, userData) => {
+  try {
+    const updatedUser = await new Promise((resolve, reject) => {
+      db.update({ username }, userData, {}, (error, data) => {
+        error ? reject(error) : resolve(data)
+      })
+    })
 
-  if (!userToUpdate) {
-    throw new Error(`User with username: "${username}" does not exist!`)
+    return updatedUser
+  } catch (error) {
+    return error
   }
-
-  userDatastore[username] = { ...userToUpdate, ...userData }
-
-  return userDatastore[username]
 }
 
-const deleteUser = (username) => {
-  const { [username]: deletedUser, ...newUserDatastore } = userDatastore
+const deleteUser = async (username) => {
+  try {
+    const deletedUser = await new Promise((resolve, reject) => {
+      db.remove({ username }, (error, data) => {
+        error ? reject(error) : resolve(data)
+      })
+    })
 
-  if (!deletedUser) {
-    throw new Error(`User with username ${username} does not exists!`)
+    return deletedUser
+  } catch (error) {
+    return error
   }
-
-  userDatastore = newUserDatastore
-
-  return deletedUser
 }
 
 module.exports = {
