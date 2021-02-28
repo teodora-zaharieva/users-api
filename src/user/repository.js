@@ -32,8 +32,21 @@ const updateUser = (username, userData) => {
   return userDatastore[username]
 }
 
+const deleteUser = (username) => {
+  const { [username]: deletedUser, ...newUserDatastore } = userDatastore
+
+  if (!deletedUser) {
+    throw new Error(`User with username ${username} does not exists!`)
+  }
+
+  userDatastore = newUserDatastore
+
+  return deletedUser
+}
+
 module.exports = {
   getUser,
   createUser,
-  updateUser
+  updateUser,
+  deleteUser
 }

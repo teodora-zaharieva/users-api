@@ -24,8 +24,17 @@ const updateUser = (req, res) => {
   res.json(updatedUser)
 }
 
+const deleteUser = (req, res) => {
+  const { username } = req.params
+
+  const deletedUser = userService.deleteUser(username, req.body)
+
+  res.json(deletedUser)
+}
+
 module.exports = {
   getUser,
   createUser,
-  updateUser
+  updateUser,
+  deleteUser
 }

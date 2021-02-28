@@ -12,8 +12,12 @@ const updateUser = (username, userData) => {
   return userRepository.updateUser(username, userData)
 }
 
+const deleteUser = (username, userData) => {
+  return userRepository.deleteUser(username, userData)
+}
 module.exports = {
   getUser,
   createUser,
-  updateUser
+  updateUser,
+  deleteUser
 }
