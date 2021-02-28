@@ -20,7 +20,20 @@ const createUser = (username, userData) => {
   return userDatastore[username]
 }
 
+const updateUser = (username, userData) => {
+  const userToUpdate = userDatastore[username]
+
+  if (!userToUpdate) {
+    throw new Error(`User with username: "${username}" does not exist!`)
+  }
+
+  userDatastore[username] = { ...userToUpdate, ...userData }
+
+  return userDatastore[username]
+}
+
 module.exports = {
   getUser,
-  createUser
+  createUser,
+  updateUser
 }

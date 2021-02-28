@@ -16,7 +16,16 @@ const createUser = (req, res) => {
   res.json(createdUser)
 }
 
+const updateUser = (req, res) => {
+  const { username } = req.params
+
+  const updatedUser = userService.updateUser(username, req.body)
+
+  res.json(updatedUser)
+}
+
 module.exports = {
   getUser,
-  createUser
+  createUser,
+  updateUser
 }

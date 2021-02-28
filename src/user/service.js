@@ -8,7 +8,12 @@ const createUser = (username, userData) => {
   return userRepository.createUser(username, userData)
 }
 
+const updateUser = (username, userData) => {
+  return userRepository.updateUser(username, userData)
+}
+
 module.exports = {
   getUser,
-  createUser
+  createUser,
+  updateUser
 }
