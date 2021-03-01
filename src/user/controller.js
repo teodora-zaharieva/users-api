@@ -25,7 +25,7 @@ const updateUser = async (req, res) => {
 }
 
 const deleteUser = async (req, res) => {
-  const deletedUser = await userService.deleteUser(req.params.username, req.body)
+  const deletedUser = await userService.deleteUser(req.params.username, req.body.password)
 
   deletedUser.error
     ? res.status(400).json({ error: deletedUser.error })
