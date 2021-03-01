@@ -1,4 +1,3 @@
-const { create } = require('domain')
 const Datastore = require('nedb')
 const path = require('path')
 
