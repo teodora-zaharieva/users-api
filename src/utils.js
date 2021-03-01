@@ -1,7 +1,7 @@
-const trimProps = (obj, ...props) => {
+const omitProps = (obj, ...props) => {
   const newObj = {}
 
-  for (let prop in obj) {
+  for (const prop in obj) {
     if (!props.includes(prop)) {
       newObj[prop] = obj[prop]
     }
@@ -10,6 +10,19 @@ const trimProps = (obj, ...props) => {
   return newObj
 }
 
+const pickProps = (obj, ...props) => {
+  const newObj = {}
+
+  for (const prop in obj) {
+    if (props.includes(prop)) {
+      newObj[prop] = obj[prop]
+    }
+  }
+
+  return newObj
+}
+
 module.exports = {
-  trimProps
+  omitProps,
+  pickProps
 }
